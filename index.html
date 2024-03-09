@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>AULA CLEAN CODE</h1>
+
+    <label for="primeiroValor">Valor 1:</label>
+    <input type="text" id="primeiroValor"/>
+    <br><br>
+
+    <label for="segundoValor">Valor 2:</label>
+    <input type="text" id="segundoValor"/>
+    <br><br>
+
+    <input type="button" value="Somar" onclick="Calculadora('Somar')"/>
+    <input type="button" value="Subtrair" onclick="Calculadora('Subtrair')"/>
+    <input type="button" value="Dividir" onclick="Calculadora('Dividir')"/>
+    <input type="button" value="Multiplicar" onclick="Calculadora('multiplicar')"/>
+    <br><br>
+
+    <label for="resultado">Resultado</label>
+    <input type="text" id="resultado" readonly/>
+    <br><br>
+
+    <script>
+        function Calculadora(tipoOperaçcao){
+            var primeiroValorHTML = document.getElementById("primeiroValor").value;
+            var segundoValorHTML = document.getElementById("segundoValor").value;
+            
+            Logar("O valor de a: " + primeiroValorHTML);
+            Logar("O valor de b: " + segundoValorHTML);
+
+            var primeiroValor = parseInt(primeiroValorHTML);
+            var segundoValor = parseInt(segundoValorHTML);
+            var valorCalculado = 0
+
+            if (tipoOperaçcao === "somar") {
+                valorCalculado = Somar(primeiroValor, segundoValor);
+            } else if (tipoOperaçcao === "subtrair"){
+                valorCalculado = Subtrair(primeiroValor, segundoValor);
+            } else if (tipoOperaçcao === "dividir"){
+                valorCalculado = Dividir(primeiroValor, segundoValor);
+            } else if (tipoOperaçcao === "Multiplicar"){
+                valorCalculado = Multiplicar(primeiroValor, segundoValor);
+            }
+
+            Resultado(valorCalculado);
+        }
+
+        function Somar(primeiroValor, segundoValor) {
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor)) {
+                return primeiroValor + segundoValor;
+            }
+        }
+
+        function Subtrair(primeiroValor, segundoValor) {
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor)) {
+               return primeiroValor - segundoValor;
+            }
+        }
+
+        function Dividir(primeiroValor, segundoValor) {
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor) && segundoValor > 0) {
+               return primeiroValor / segundoValor;
+            }
+        }
+
+        function Multiplicar(primeiroValor, segundoValor) {
+            if (ValidarOperacaoMatematica(primeiroValor, segundoValor)) {
+               return primeiroValor * segundoValor;
+            }
+        }
+
+        function ValidarOperacaoMatematica(primeiroNumero, segundoNumero){
+            if(ValidarNumeroPositivo(primeiroNumero) && 
+            ValidarNumeroPositivo(segundoNumero)){
+                return true;
+            }
+            return false
+        }
+
+        function ValidarNumeroPositivo(numero){
+            if (numero > 0){
+                return true;
+            }
+            return false;
+        }
+
+        function Resultado(resultado) {
+            document.getElementById("resultado").value = resultado;
+        }
+
+        function Logar(mensagem) {
+            console.log(mensagem);
+        }
+
+    </script>
+</body>
+</html>
